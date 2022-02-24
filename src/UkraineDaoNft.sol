@@ -1,17 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
 
-import "lib/openzeppelin-contracts/contracts/token/ERC1155/ERC1155.sol";
-import "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol";
-import "lib/openzeppelin-contracts/contracts/access/Ownable.sol";
-import "lib/openzeppelin-contracts/contracts/security/ReentrancyGuard.sol";
+import "openzeppelin-contracts/contracts/token/ERC1155/ERC1155.sol";
+import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import "openzeppelin-contracts/contracts/security/ReentrancyGuard.sol";
+import "openzeppelin-contracts/contracts/utils/math/SafeMath.sol";
 
-contract UkraineDaoNft is
-    ERC1155,
-    IERC1155MetadataURI,
-    Ownable,
-    ReentrancyGuard
-{
+import "./Base64.sol";
+
+contract UkraineDaoNft is Ownable, ReentrancyGuard, ERC1155 {
     using SafeMath for uint256;
 
     // 0.1 ether

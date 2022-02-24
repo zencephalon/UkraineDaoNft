@@ -27,14 +27,12 @@ contract UkraineDaoNft is Ownable, ReentrancyGuard, ERC1155 {
         _mint(msg.sender, 0, _number, "");
     }
 
-    function withdraw() external onlyOwner {
-        uint256 amount = address(this).balance;
-        (bool success, ) = owner().call{value: amount}("");
-        require(success, "Withdraw failed");
+    function withdraw(address payable _to) public onlyOwner {
+        payable(_to).transfer(address(this).balance);
     }
 
     /// @notice returns the uri metadata. Used by marketplaces and wallets to show the NFT
-    function uri(uint256 _nftId) public view override returns (string memory) {
+    function uri(uint256 _nftId) public pure override returns (string memory) {
         string memory json = Base64.encode(
             bytes(
                 string(

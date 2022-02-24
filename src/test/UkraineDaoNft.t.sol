@@ -24,4 +24,11 @@ contract UkraineDaoNftTest is DSTest {
         cheats.prank(address(0));
         ukraineDaoNft.withdraw();
     }
+
+    function canMint() public {
+        cheats.prank(address(0));
+        ukraineDaoNft.mint(5);
+        ukraineDaoNft.withdraw();
+        assertEq(address(this).balance(), 0);
+    }
 }
